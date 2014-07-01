@@ -74,8 +74,9 @@ mkdir $v $EASY_DIR
 cp $v -ar $EASY_RSA/* $EASY_DIR/
 chmod $v 700 $EASY_DIR
 cp $v -a $EASY_DIR/vars{,.orig}
-cd $EASY_RSA
+cd $EASY_DIR
 OPENSSL_CNF=$(basename $(find $EASY_DIR -name "openssl-1.?.?.cnf" | sort | tail -1))
+[ -f $EASY_DIR/openssl.cnf ] && mv $v $EASY_DIR/openssl.cnf{,.orig}
 ln $v -s $OPENSSL_CNF openssl.cnf
 cd - >/dev/null
 
