@@ -7,7 +7,11 @@ openvpn-roadwarrior
 The following tasks are automated in this approximate order:
 
 1. Install `openvpn` and `easy-rsa` packages using either CentOS or Ubuntu settings.
+<<<<<<< HEAD
 - Note that the `easy-rsa` package was previously bundled with older versions of CentOS and Ubuntu.
+=======
+..1. Note that the `easy-rsa` package was previously bundled with older versions of CentOS and Ubuntu.
+>>>>>>> 3303b3e046255a96854e48f3638037eaf138266f
 2. Setup `/etc/openvpn` directory and sub-directories.
 3. Generate certificate authority, Diffie-Hellman, server, and (1) client certificate and key pairs.
 4. Create server configuration file, up and down roadwarrior script, and client configuraiton file.
