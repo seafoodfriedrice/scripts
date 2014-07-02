@@ -7,12 +7,12 @@ openvpn-roadwarrior
 The following tasks are automated in roughly this order:
 
 1. Install `openvpn` and `easy-rsa` packages using either CentOS or Ubuntu settings.
-..+ Note that the `easy-rsa` package was previously bundled with older versions of CentOS and Ubuntu.
+  * Note that the `easy-rsa` package was previously bundled with older versions of CentOS and Ubuntu.
 2. Setup `/etc/openvpn` directory and relevant sub-directories.
 3. Generate certificate authority, Diffie-Hellman, server, and (1) client certificate and key pairs.
 4. Create server configuration file, up/down `roadwarrior` script, and client configuration file.
 5. Configure OpenVPN to work with SELinux if using CentOS.
-..+ Settings are configured regardless if server is in Enforcing, Permissive, or Disabled SELinux modes.
+  * Settings are configured regardless if server is in Enforcing, Permissive, or Disabled SELinux modes.
 6. Archive first client certificate and key pair as `/root/openvpn-01.tar.gz`.
 
 ### Usage
@@ -31,9 +31,9 @@ KEY_SIZE="2048"                 # Size of certificates and keys: 2048 or 4096
 
 Run `./openvpn-roadwarrior` or `./openvpn-roadwarrior.sh --verbose`.
 
-Hit **<ENTER>** or answer **y** when prompted to sign certificate:
+Hit **ENTER** or answer **y** when prompted to sign certificate:
 
-```bash
+````
 Generating a 2048 bit RSA private key
 writing new private key to 'ca.key'
 -----
@@ -54,7 +54,7 @@ Name [openvpn]:		<ENTER>
 Email Address []:	<ENTER>
 ````
 
-````bash
+````
 Generating a 2048 bit RSA private key
 ...................................+++
 ....................................+++
@@ -94,7 +94,7 @@ Write out database with 1 new entries
 Data Base Updated
 ````
 
-````bash
+````
 Generating a 2048 bit RSA private key
 writing new private key to 'openvpn-01.key'
 -----
@@ -128,4 +128,8 @@ Certificate is to be certified until Jun 28 06:17:32 2024 GMT (3650 days)
 Sign the certificate? [y/n]: y
 ````
 
-Client files are archived in `/root` as `openvpn-01.tar.gz`. Note that the extension of the `.conf` file should be changed to `.ovpn` if using OpenVPN in Windows.
+### Client Configuration
+
+Client files are archived in `/root` as `openvpn-01.tar.gz`. Extract the `.conf` file into `/etc/openvpn` and the certificate key files to `/etc/openvpn/keys`.
+
+Note that the extension of the `.conf` file should be changed to `.ovpn` for OpenVPN clients using Windows.
