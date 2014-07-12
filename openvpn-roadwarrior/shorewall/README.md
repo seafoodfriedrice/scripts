@@ -41,7 +41,7 @@ If using the Shorewall configuration files the `/etc/openvpn/scripts/roadwarrior
 NET_IF=eth0
 IF_OPTIONS=arp_filter,dhcp,nosmurfs,routefilter,tcpflags
 ROAD_IF=tun0
-ROAD_NET=172.24.233.0/24
+ROAD_NET=172.16.255.0/24
 DNAT_DNS=8.8.8.8                # Google DNS
 #LAST LINE -- DO NOT REMOVE
 ````
