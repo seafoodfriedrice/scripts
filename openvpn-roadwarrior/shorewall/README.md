@@ -17,32 +17,32 @@ If using the Shorewall configuration files the `/etc/openvpn/scripts/roadwarrior
 #
 # /etc/shorewall/params
 #
-#	Assign any variables that you need here.
+#       Assign any variables that you need here.
 #
-#	It is suggested that variable names begin with an upper case letter
-#	to distinguish them from variables used internally within the
-#	Shorewall programs
+#       It is suggested that variable names begin with an upper case letter
+#       to distinguish them from variables used internally within the
+#       Shorewall programs
 #
-#	Example:
+#       Example:
 #
-#		NET_IF=eth0
-#		NET_BCAST=130.252.100.255
-#		NET_OPTIONS=routefilter,norfc1918
+#               NET_IF=eth0
+#               NET_BCAST=130.252.100.255
+#               NET_OPTIONS=routefilter,norfc1918
 #
-#	Example (/etc/shorewall/interfaces record):
+#       Example (/etc/shorewall/interfaces record):
 #
-#		net	$NET_IF		$NET_BCAST	$NET_OPTIONS
+#               net     $NET_IF         $NET_BCAST      $NET_OPTIONS
 #
-#	The result will be the same as if the record had been written
+#       The result will be the same as if the record had been written
 #
-#		net	eth0		130.252.100.255	routefilter,norfc1918
+#               net     eth0            130.252.100.255 routefilter,norfc1918
 #
 ###############################################################################
 NET_IF=eth0
 IF_OPTIONS=arp_filter,dhcp,nosmurfs,routefilter,tcpflags
 ROAD_IF=tun0
 ROAD_NET=172.24.233.0/24
-DNAT_DNS=8.8.8.8		# Google DNS
+DNAT_DNS=8.8.8.8                # Google DNS
 #LAST LINE -- DO NOT REMOVE
 ````
 
@@ -60,10 +60,10 @@ DNAT_DNS=8.8.8.8		# Google DNS
 ###############################################################################
 ?FORMAT 2
 ###############################################################################
-#ZONE		INTERFACE		OPTIONS
--		lo			ignore
-net		$NET_IF			$IF_OPTIONS	
-road		$ROAD_IF		$IF_OPTIONS	
+#ZONE           INTERFACE               OPTIONS
+-               lo                      ignore
+net             $NET_IF                 $IF_OPTIONS     
+road            $ROAD_IF                $IF_OPTIONS     
 ````
 
 ###### /etc/shorewall/zones
@@ -78,11 +78,11 @@ road		$ROAD_IF		$IF_OPTIONS
 # http://www.shorewall.net/manpages/shorewall-zones.html
 #
 ###############################################################################
-#ZONE	TYPE		OPTIONS		IN			OUT
-#					OPTIONS			OPTIONS
-fw	firewall
-net	ipv4
-road	ipv4
+#ZONE   TYPE            OPTIONS         IN                      OUT
+#                                       OPTIONS                 OPTIONS
+fw      firewall
+net     ipv4
+road    ipv4
 ````
 
 ###### /etc/shorewall/masq
@@ -97,9 +97,9 @@ road	ipv4
 # http://www.shorewall.net/manpages/shorewall-masq.html
 #
 ###############################################################################
-#INTERFACE:DEST		SOURCE		ADDRESS		PROTO	PORT(S)	IPSEC
+#INTERFACE:DEST         SOURCE          ADDRESS         PROTO   PORT(S) IPSEC
 #
-$NET_IF			$ROAD_NET
+$NET_IF                 $ROAD_NET
 ````
 
 ###### /etc/shorewall/policy
@@ -114,13 +114,13 @@ $NET_IF			$ROAD_NET
 # http://www.shorewall.net/manpages/shorewall-policy.html
 #
 ###############################################################################
-#SOURCE	DEST	POLICY		LOG	LIMIT:		CONNLIMIT:
-#				LEVEL	BURST		MASK
-$FW	net	ACCEPT
-$FW	road	REJECT		info
-road	net	ACCEPT
-road	$FW	ACCEPT
-net	all	DROP		info
+#SOURCE DEST    POLICY          LOG     LIMIT:          CONNLIMIT:
+#                               LEVEL   BURST           MASK
+$FW     net     ACCEPT
+$FW     road    REJECT          info
+road    net     ACCEPT
+road    $FW     ACCEPT
+net     all     DROP            info
 ````
 
 ###### /etc/shorewall/rules
@@ -135,8 +135,8 @@ net	all	DROP		info
 # http://www.shorewall.net/manpages/shorewall-rules.html
 #
 ###############################################################################
-#ACTION		SOURCE		DEST		PROTO	DEST	SOURCE
-#							PORT	PORT(S)
+#ACTION         SOURCE          DEST            PROTO   DEST    SOURCE
+#                                                       PORT    PORT(S)
 #SECTION ALL
 #SECTION ESTABLISHED
 #SECTION RELATED
@@ -144,9 +144,9 @@ net	all	DROP		info
 #SECTION UNTRACKED
 SECTION NEW
 
-Invalid(DROP)	net		$FW		all
-Ping(ACCEPT)	net,road	$FW
-SSH(ACCEPT)	net,road	$FW
-OpenVPN(ACCEPT)	net		$FW
-DNS(DNAT)	road		net:$DNAT_DNS		# DNS redirect
+Invalid(DROP)   net             $FW             all
+Ping(ACCEPT)    net,road        $FW
+SSH(ACCEPT)     net,road        $FW
+OpenVPN(ACCEPT) net             $FW
+DNS(DNAT)       road            net:$DNAT_DNS           # DNS redirect
 ````
