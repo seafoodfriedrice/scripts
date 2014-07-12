@@ -1,0 +1,16 @@
+#
+# Shorewall version 4 - Policy File
+#
+# For information about entries in this file, type "man shorewall-policy"
+#
+# The manpage is also online at
+# http://www.shorewall.net/manpages/shorewall-policy.html
+#
+###############################################################################
+#SOURCE	DEST	POLICY		LOG	LIMIT:		CONNLIMIT:
+#				LEVEL	BURST		MASK
+$FW	net	ACCEPT
+$FW	road	REJECT		info
+road	net	ACCEPT
+road	$FW	ACCEPT
+net	all	DROP		info
