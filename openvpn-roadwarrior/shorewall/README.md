@@ -1,6 +1,6 @@
 Shorewall configuration for openvpn-roadwarrior.sh
 -----
-Place configuration files for `/etc/shorewall` directory. Relevant contents of configuration files are shown below for quick reference.
+Configuration files for `/etc/shorewall` directory to handle OpenVPN roadwarrior-style setup. Relevant contents of configuration files are shown below for quick reference.
 
 If using the Shorewall configuration files the `/etc/openvpn/scripts/roadwarrior` script should be disabled in the OpenVPN server configuration because the `masq` and `rules` files handle the DNS redirect and tunnel interface masquerading. 
 
