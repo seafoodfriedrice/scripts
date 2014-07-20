@@ -9,6 +9,14 @@ If using the Shorewall configuration files the `/etc/openvpn/scripts/roadwarrior
 #plugin /usr/lib/openvpn/openvpn-plugin-down-root.so /etc/openvpn/scripts/roadwarrior
 ````
 
+#### /etc/shorewall/shorewall.conf — IPv4 Forwarding
+
+Double check that IPv4 forwarding is forced in the `shorewall.conf` configuration file:
+
+````
+IP_FORWARDING=Yes
+````
+
 ###### /etc/shorewall/params
 
 ````
